@@ -7,6 +7,7 @@
 |
 */
 
+import LanguagesController from '#controllers/languages_controller'
 import router from '@adonisjs/core/services/router'
 
 router.get('/', async () => {
@@ -14,3 +15,9 @@ router.get('/', async () => {
     hello: 'world',
   }
 })
+
+router
+  .group(() => {
+    router.resource('languages', LanguagesController).apiOnly()
+  })
+  .prefix('/api/v1')
