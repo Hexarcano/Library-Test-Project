@@ -30,7 +30,7 @@ export default class LanguagesController {
       response.status(200).send('New language created.')
     } catch (error) {
       trx.rollback()
-      response.status(400).send('Invalid request.')
+      response.status(500).send('Invalid request.')
     }
   }
 
@@ -48,7 +48,6 @@ export default class LanguagesController {
    */
   async update({ params, request }: HttpContext) {
     const language = await Language.findOrFail(params.id)
-    console.log(language)
     language.name = request.input('name')
 
     await language.save()
