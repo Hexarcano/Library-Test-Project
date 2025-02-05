@@ -39,7 +39,6 @@ export default class AuthorsController {
       response.status(200).send('New author created.')
     } catch (error) {
       trx.rollback()
-      console.log(error)
       response.status(500).send('Invalid request.')
     }
   }

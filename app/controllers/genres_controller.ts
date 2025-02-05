@@ -27,7 +27,7 @@ export default class GenresController {
 
       genre.save()
       trx.commit()
-      response.status(200).send('New language created.')
+      response.status(200).send('New genre created.')
     } catch (error) {
       trx.rollback()
       response.status(500).send('Invalid request.')
