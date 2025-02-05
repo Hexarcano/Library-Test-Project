@@ -9,6 +9,7 @@
 
 import AuthorsController from '#controllers/authors_controller'
 import CountriesController from '#controllers/countries_controller'
+import EditorialsController from '#controllers/editorials_controller'
 import GenresController from '#controllers/genres_controller'
 import LanguagesController from '#controllers/languages_controller'
 import router from '@adonisjs/core/services/router'
@@ -24,6 +25,7 @@ router
     router.resource('languages', LanguagesController).apiOnly(),
     router.resource('authors', AuthorsController).apiOnly(),
     router.resource('genres', GenresController).apiOnly(),
-    router.resource('countries', CountriesController).apiOnly()
+    router.resource('countries', CountriesController).apiOnly(),
+    router.resource('editorials', EditorialsController).apiOnly()
   })
   .prefix('/api/v1')

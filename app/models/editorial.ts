@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
-import type { HasOne } from '@adonisjs/lucid/types/relations'
+import { BaseModel, belongsTo, column, hasOne } from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Country from '#models/country'
 
 export default class Editorial extends BaseModel {
@@ -16,8 +16,11 @@ export default class Editorial extends BaseModel {
   @column()
   declare address: string
 
-  @hasOne(() => Country)
-  declare country_id: HasOne<typeof Country>
+  @column()
+  declare countryId: number
+
+  @belongsTo(() => Country)
+  declare country: BelongsTo<typeof Country>
 
   @column()
   declare postal_code: string
