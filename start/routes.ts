@@ -8,6 +8,7 @@
 */
 
 import AuthorsController from '#controllers/authors_controller'
+import BooksController from '#controllers/books_controller'
 import CountriesController from '#controllers/countries_controller'
 import EditorialsController from '#controllers/editorials_controller'
 import GenresController from '#controllers/genres_controller'
@@ -22,10 +23,11 @@ router.get('/', async () => {
 
 router
   .group(() => {
-    router.resource('languages', LanguagesController).apiOnly(),
-    router.resource('authors', AuthorsController).apiOnly(),
-    router.resource('genres', GenresController).apiOnly(),
-    router.resource('countries', CountriesController).apiOnly(),
+    router.resource('languages', LanguagesController).apiOnly()
+    router.resource('authors', AuthorsController).apiOnly()
+    router.resource('genres', GenresController).apiOnly()
+    router.resource('countries', CountriesController).apiOnly()
     router.resource('editorials', EditorialsController).apiOnly()
+    router.resource('books', BooksController).apiOnly()
   })
   .prefix('/api/v1')

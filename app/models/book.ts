@@ -1,11 +1,11 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne, manyToMany } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
 import Country from '#models/country'
 import Language from '#models/language'
 import Author from '#models/author'
 import Genre from '#models/genre'
 import Editorial from '#models/editorial'
-import type { HasOne, ManyToMany } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 
 export default class Book extends BaseModel {
   @column({ isPrimary: true })
@@ -23,11 +23,17 @@ export default class Book extends BaseModel {
   @column()
   declare publication_date: Date
 
-  @hasOne(() => Country)
-  declare country_id: HasOne<typeof Country>
+  @column()
+  declare countryId: number
 
-  @hasOne(() => Language)
-  declare language_id: HasOne<typeof Language>
+  @belongsTo(() => Country)
+  declare country: BelongsTo<typeof Country>
+
+  @column()
+  declare languageId: number
+
+  @belongsTo(() => Language)
+  declare language: BelongsTo<typeof Language>
 
   @manyToMany(() => Author, {
     pivotTable: 'book_authors',
@@ -35,6 +41,7 @@ export default class Book extends BaseModel {
     pivotForeignKey: 'book_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'author_id',
+    pivotTimestamps: true,
   })
   declare authors: ManyToMany<typeof Author>
 
@@ -44,6 +51,7 @@ export default class Book extends BaseModel {
     pivotForeignKey: 'book_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'genre_id',
+    pivotTimestamps: true,
   })
   declare genres: ManyToMany<typeof Genre>
 
@@ -53,6 +61,7 @@ export default class Book extends BaseModel {
     pivotForeignKey: 'book_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'editorial_id',
+    pivotTimestamps: true,
   })
   declare editorials: ManyToMany<typeof Editorial>
 
